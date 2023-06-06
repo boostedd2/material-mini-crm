@@ -14,11 +14,22 @@ const styles = {
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',
-    alignContent: 'center',
+    alignItems: 'center',
     maxWidth: 1000,
-    height: '100vh',
+    minHeight: '100%',
     margin: 'auto',
-    zIndex: 9
+    zIndex: 9,
+
+    [theme.breakpoints.up("sm")]: {
+      position: 'relative',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      maxWidth: 1000,
+      minHeight: '100vh',
+      margin: 'auto',
+      zIndex: 9,
+    }
   },
   gridWrapper: {
     display: 'flex',
@@ -27,9 +38,21 @@ const styles = {
     maxWidth: 1000,
     width: '100%',
     height: 600,
-    margin: 'auto',
+    margin: '40px 20px 20px 20px',
     overflow: 'hidden',
-    backgroundColor: theme.palette.lightBackground.main
+    backgroundColor: theme.palette.lightBackground.main,
+
+    [theme.breakpoints.up("sm")]: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignContent: 'center',
+      maxWidth: 1000,
+      width: '100%',
+      height: 600,
+      margin: '20px',
+      overflow: 'hidden',
+      backgroundColor: theme.palette.lightBackground.main
+    }
   },
   loginLeftContent: {
     position: 'relative',
@@ -60,7 +83,13 @@ const styles = {
     '& > form': {
       display: 'flex',
       flexDirection: 'column',
-      width: '50%'
+      width: '80%',
+
+      [theme.breakpoints.up("sm")]: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '50%',
+      }
     }
   },
   formField: {
@@ -76,22 +105,46 @@ const styles = {
   bytewiseLink: {
     position: 'absolute',
     bottom: 5,
-    left: 15,
+    left: '50%',
+    transform: 'translateX(-50%)',
     fontFamily: 'Roboto, Arial, sans-serif',
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: 300,
     letterSpacing: 1,
     color: '#ffffff',
     textDecoration: 'none',
-    cursor: 'pointer'
+    cursor: 'pointer',
+
+    [theme.breakpoints.up("sm")]: {
+      position: 'absolute',
+      bottom: 5,
+      left: 15,
+      transform: 'none',
+      fontFamily: 'Roboto, Arial, sans-serif',
+      fontSize: 13,
+      fontWeight: 300,
+      letterSpacing: 1,
+      color: '#ffffff',
+      textDecoration: 'none',
+      cursor: 'pointer',
+    }
   },
   arrowIcon: {
     position: 'relative',
     top: 2,
     right: 5,
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: 300,
     color: '#ffffff',
+
+    [theme.breakpoints.up("sm")]: {
+      position: 'relative',
+      top: 2,
+      right: 5,
+      fontSize: 13,
+      fontWeight: 300,
+      color: '#ffffff',
+    }
   },
   backgroundOverlay: {
     position: 'absolute',
@@ -124,7 +177,7 @@ const LoginPage = () => {
         <Box sx={styles.pageWrapper}>
           <Paper elevation={8} sx={styles.gridWrapper}>
             <Grid container>
-              <Grid item xs={4} sx={styles.loginLeftContent}>
+              <Grid item xs={12} md={4} sx={styles.loginLeftContent}>
                 <Image src={'/mui.svg'} alt={'material-mini-crm'} width={125} height={125} />
                 <Typography variant='h3' sx={styles.materialMinLogo}>
                   MiniCRM
@@ -134,7 +187,7 @@ const LoginPage = () => {
                   Bytewise Software
                 </Typography>
               </Grid>
-              <Grid item xs={8}>
+              <Grid item xs={12} md={8}>
                 <Formik
                   initialValues={{email: '', password: ''}}
                   validationSchema={validationSchema}
