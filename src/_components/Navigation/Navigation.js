@@ -31,6 +31,9 @@ import {
 } from "@mui/material";
 import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "@/_context/AuthContext";
+import {useRouter} from "next/router";
+import Link from "next/link";
+import Image from "next/image";
 
 const drawerWidth = 240;
 
@@ -81,6 +84,21 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
+const AppBarLogo = styled(Box)(({theme}) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  marginLeft: 'auto',
+  color: '#ffffff',
+
+  '& p': {
+    position: 'relative',
+    top: 2,
+    fontSize: 20,
+    marginLeft: 8
+  }
+}));
+
 const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})(
   ({theme, open}) => ({
     width: drawerWidth,
@@ -112,6 +130,7 @@ const LogoutButton = styled(ListItemButton)(({theme}) => ({
 
 export default function MiniDrawer() {
   const {logout} = useContext(AuthContext);
+  const router = useRouter();
 
   const theme = useTheme();
   const [open, setOpen] = useState(true);
@@ -157,6 +176,12 @@ export default function MiniDrawer() {
             >
               <MenuIcon/>
             </IconButton>
+            <AppBarLogo>
+              <Image src={'/mui.svg'} alt={'material-mini-crm'} width={38} height={38}/>
+              <Typography>
+                MiniCRM
+              </Typography>
+            </AppBarLogo>
           </Toolbar>
         </AppBar>
 
@@ -182,12 +207,13 @@ export default function MiniDrawer() {
             {menuItems.map((item) => (
               <ListItem key={item.id} disablePadding sx={{display: 'block'}}>
                 <ListItemButton
-                  component="a"
+                  component={Link}
                   href={item.link}
                   sx={{
                     minHeight: 48,
                     justifyContent: open ? 'initial' : 'center',
                     px: 2.5,
+                    ...(router.pathname === item.link ? { background: 'rgba(0, 0, 0, 0.04)' } : {}),
                   }}
                 >
                   <ListItemIcon
