@@ -85,17 +85,43 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const AppBarLogo = styled(Box)(({theme}) => ({
+
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
   marginLeft: 'auto',
   color: '#ffffff',
 
+  '& img': {
+    width: 24,
+    height: 24
+  },
+
   '& p': {
     position: 'relative',
-    top: 2,
-    fontSize: 20,
-    marginLeft: 8
+    top: 0.5,
+    fontSize: 18,
+    marginLeft: 5
+  },
+
+  [theme.breakpoints.up("sm")]: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    marginLeft: 'auto',
+    color: '#ffffff',
+
+    '& img': {
+      width: 38,
+      height: 38
+    },
+
+    '& p': {
+      position: 'relative',
+      top: 2,
+      fontSize: 20,
+      marginLeft: 8
+    }
   }
 }));
 
@@ -133,7 +159,7 @@ export default function MiniDrawer() {
   const router = useRouter();
 
   const theme = useTheme();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [logoutConfirmationOpen, setLogoutConfirmationOpen] = useState(false);
 
   const handleDrawerOpen = () => {
