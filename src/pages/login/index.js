@@ -115,7 +115,7 @@ const styles = {
     textDecoration: 'none',
     cursor: 'pointer',
 
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       position: 'absolute',
       bottom: 5,
       left: 15,
@@ -137,7 +137,7 @@ const styles = {
     fontWeight: 300,
     color: '#ffffff',
 
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       position: 'relative',
       top: 2,
       right: 5,
