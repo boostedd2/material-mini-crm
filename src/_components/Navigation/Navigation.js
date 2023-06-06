@@ -150,7 +150,7 @@ const menuItems = [
 
 const LogoutButton = styled(ListItemButton)(({theme}) => ({
   '&:hover': {
-    backgroundColor: theme.palette.error.main,
+    backgroundColor: theme.palette.errorLighter.main,
   },
 }));
 
