@@ -282,7 +282,7 @@ export default function MiniDrawer() {
 
 
         <Dialog open={logoutConfirmationOpen} onClose={handleLogoutConfirmationClose}>
-          <DialogTitle>Logout Confirmation</DialogTitle>
+          <DialogTitle>Logout</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Are you sure you want to logout?

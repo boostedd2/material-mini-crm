@@ -28,8 +28,15 @@ function AppRoot({ Component, pageProps }) {
 
   return (
     <ThemeProvider theme={theme}>
-      {isLoggedIn && !isLoginPage && <MiniDrawer />}
-      <Component {...pageProps} />
+      {isLoggedIn && !isLoginPage &&
+        <>
+        <MiniDrawer />
+          <div id={'navbar-fixed-padding'} style={{ paddingTop: '64px' }}></div>
+        </>
+      }
+      <div className={!isLoginPage ? 'sidebarNavCompensate' : undefined}>
+        <Component {...pageProps} />
+      </div>
     </ThemeProvider>
   );
 }

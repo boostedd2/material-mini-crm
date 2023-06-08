@@ -9,3 +9,18 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
 }
+
+
+
+
+.sidebarNavCompensate {
+  margin-left: 64px;
+  flex-grow: 1;
+}
+
+@media screen and (min-width: 1300px) {
+  .sidebarNavCompensate {
+    margin-left: unset;
+    flex-grow: unset;
+  }
+}
