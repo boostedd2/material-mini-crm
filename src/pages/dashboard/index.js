@@ -1,7 +1,8 @@
 import React, {useContext} from 'react';
 import withAuth from "@/_context/withAuth";
-import {Container} from "@mui/material";
+import {Container, Typography} from "@mui/material";
 import TicketTabs from "@/_components/Dashboard/TabMenu";
+import DashboardActions from "@/_components/Dashboard/DashboardActions";
 
 const styles = {
 
@@ -10,7 +11,9 @@ const styles = {
 const Dashboard = () => {
   return (
       <main>
-        <Container>
+        <Container sx={{marginTop: '35px'}}>
+          <Typography variant="h4">Dashboard</Typography>
+          <DashboardActions />
           <TicketTabs />
         </Container>
       </main>

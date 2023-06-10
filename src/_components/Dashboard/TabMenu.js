@@ -47,7 +47,7 @@ const TicketTabs = () => {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%', marginTop: '20px' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="ticket tabs">
           <Tab label="Open" {...a11yProps(0)} />
