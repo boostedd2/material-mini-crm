@@ -201,7 +201,7 @@ function TicketsTableToolbar(props) {
         </Typography>
       ) : (
         <Typography
-          sx={{ flex: '1 1 100%' }}
+          sx={{ flex: '1 1 100%', color: (theme) => theme.palette.primary.darkHeading }}
           variant="h6"
           id="tableTitle"
           component="div"
@@ -289,7 +289,7 @@ const TicketsTable = () => {
   );
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%', mt: 1 }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <TicketsTableToolbar numSelected={selected.length} />
         <TableContainer>
