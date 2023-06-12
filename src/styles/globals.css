@@ -18,7 +18,7 @@ body {
   flex-grow: unset;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 900px) {
   .sidebarNavCompensate {
     margin-left: 64px;
     flex-grow: 1;
