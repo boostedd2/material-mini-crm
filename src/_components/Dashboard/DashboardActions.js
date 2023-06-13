@@ -30,10 +30,11 @@ const RecentTicketCard = styled(Paper)(({theme}) => ({
 
   '& .smallLabel': {
     marginTop: '25px',
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '800',
     color: '#4c4c4c',
     textTransform: 'uppercase',
+    letterSpacing: '0.08em',
 
     '&:first-of-type': {
       marginTop: '5px',
@@ -55,9 +56,11 @@ const RecentTicketCard = styled(Paper)(({theme}) => ({
 
 const DashboardActionsWrapper = styled(Box)(({theme}) => ({
   display: 'flex',
+  gap: 10,
 
   [theme.breakpoints.up('sm')]: {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    gap: 'unset'
   },
 }));
 
@@ -104,18 +107,18 @@ const DashboardActions = () => {
       </Grid>
       <Grid item xs={12} sm={6}>
         <DashboardActionsWrapper>
-        <DashboardActionButton sx={{marginBottom: '10px'}}>
-          <Grid container direction="column" alignItems="center" justify="center">
-            <NoteAddIcon />
-            <Typography>Ticket</Typography>
-          </Grid>
-        </DashboardActionButton>
-        <DashboardActionButton>
-          <Grid container direction="column" alignItems="center" justify="center">
-            <PersonAddIcon />
-            <Typography>Customer</Typography>
-          </Grid>
-        </DashboardActionButton>
+          <DashboardActionButton sx={{marginBottom: '10px'}}>
+            <Grid container direction="column" alignItems="center" justify="center">
+              <NoteAddIcon/>
+              <Typography>Ticket</Typography>
+            </Grid>
+          </DashboardActionButton>
+          <DashboardActionButton>
+            <Grid container direction="column" alignItems="center" justify="center">
+              <PersonAddIcon/>
+              <Typography>Customer</Typography>
+            </Grid>
+          </DashboardActionButton>
         </DashboardActionsWrapper>
       </Grid>
     </Grid>
