@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TicketsTable from "@/_components/Dashboard/TicketsTable";
+import ClosedTicketsTable from "@/_components/Dashboard/ClosedTicketsTable";
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -58,7 +59,7 @@ const TicketTabs = () => {
         <TicketsTable />
       </TabPanel>
       <TabPanel value={value} index={1}>
-
+        <ClosedTicketsTable />
       </TabPanel>
     </Box>
   );
