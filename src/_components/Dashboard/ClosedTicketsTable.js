@@ -13,13 +13,6 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 
 function createData(ticket, customer, title, opened) {
@@ -87,16 +80,16 @@ const headCells = [
     label: 'Ticket',
   },
   {
-    id: 'customer',
-    numeric: false,
-    disablePadding: false,
-    label: 'Customer',
-  },
-  {
     id: 'title',
     numeric: false,
     disablePadding: false,
     label: 'Title',
+  },
+  {
+    id: 'customer',
+    numeric: false,
+    disablePadding: false,
+    label: 'Customer',
   },
   {
     id: 'opened',
@@ -266,8 +259,8 @@ const ClosedTicketsTable = () => {
                     >
                       {row.ticket}
                     </TableCell>
-                    <TableCell align="left">{row.customer}</TableCell>
                     <TableCell align="left">{row.title}</TableCell>
+                    <TableCell align="left">{row.customer}</TableCell>
                     <TableCell align="left">{row.opened}</TableCell>
                   </TableRow>
                 );
