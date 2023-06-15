@@ -82,7 +82,7 @@ const DashboardActionButton = styled(Button)(({theme}) => ({
 }));
 
 
-const DashboardActions = () => {
+const DashboardActions = ({ openNewTicketDialog, openNewCustomerDialog }) => {
   return (
     <Grid container mt={0} spacing={2}>
       <Grid item xs={12} sm={6}>
@@ -107,13 +107,13 @@ const DashboardActions = () => {
       </Grid>
       <Grid item xs={12} sm={6}>
         <DashboardActionsWrapper>
-          <DashboardActionButton sx={{marginBottom: '10px'}}>
+          <DashboardActionButton sx={{marginBottom: '10px'}} onClick={() => openNewTicketDialog()}>
             <Grid container direction="column" alignItems="center" justify="center">
               <NoteAddIcon/>
               <Typography>Ticket</Typography>
             </Grid>
           </DashboardActionButton>
-          <DashboardActionButton>
+          <DashboardActionButton  onClick={() => openNewCustomerDialog()}>
             <Grid container direction="column" alignItems="center" justify="center">
               <PersonAddIcon/>
               <Typography>Customer</Typography>
