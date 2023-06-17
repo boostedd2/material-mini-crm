@@ -4,6 +4,7 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Grid from "@mui/material/Grid";
 import {styled} from "@mui/material/styles";
+import {stateOptions} from "@/utils/constants";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required('Required'),
@@ -123,7 +124,7 @@ const NewCustomerDialog = ({ open, onClose }) => {
                   <StyledAutocomplete
                     disablePortal
                     name="state"
-                    options={[]}
+                    options={stateOptions}
                     onChange={(e, value) => setFieldValue("state", value.label)}
                     onBlur={() => setFieldTouched("state", true)}
                     error={touched.state && Boolean(errors.state)}
