@@ -1,17 +1,46 @@
 import React from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
+import {Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, Autocomplete} from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import Grid from "@mui/material/Grid";
+import {styled} from "@mui/material/styles";
 
 const validationSchema = Yup.object().shape({
-  field1: Yup.string().required('Field 1 is required'),
-  field2: Yup.string().required('Field 2 is required'),
+  firstName: Yup.string().required('Required'),
+  lastName: Yup.string().required('Required'),
+  email: Yup.string().required('Required'),
+  phone: Yup.string().required('Required'),
+  address: Yup.string().required('Required'),
+  city: Yup.string().required('Required'),
+  state: Yup.string().required('Required'),
+  zip: Yup.string().required('Required'),
+  profileNotes: Yup.string().required('Required'),
 });
 
 const initialValues = {
-  field1: '',
-  field2: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: '',
+  address: '',
+  city: '',
+  state: '',
+  zip: '',
+  profileNotes: '',
 };
+
+const StyledGridContainer = styled(Grid)(({ theme }) => ({
+  marginTop: '0px'
+}));
+
+const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
+  width: '100%',
+
+  '& .MuiAutocomplete-inputRoot': {
+    width: '100%',
+    color: theme.palette.text.primary,
+  },
+}));
 
 const NewCustomerDialog = ({ open, onClose }) => {
   const handleSubmit = (values) => {
@@ -27,24 +56,112 @@ const NewCustomerDialog = ({ open, onClose }) => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ errors, touched }) => (
+          {({errors, values, setFieldValue, touched, setFieldTouched}) => (
             <Form>
-              <Field
-                as={TextField}
-                name="field1"
-                label="Field 1"
-                error={touched.field1 && Boolean(errors.field1)}
-                helperText={touched.field1 && errors.field1}
-              />
-              <br />
-              <Field
-                as={TextField}
-                name="field2"
-                label="Field 2"
-                error={touched.field2 && Boolean(errors.field2)}
-                helperText={touched.field2 && errors.field2}
-              />
-              <br />
+              <StyledGridContainer container spacing={2}>
+                <Grid item xs={6}>
+                  <Field
+                    as={TextField}
+                    name="firstName"
+                    label="First Name"
+                    error={touched.firstName && Boolean(errors.firstName)}
+                    helperText={touched.firstName && errors.firstName}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <Field
+                    as={TextField}
+                    name="lastName"
+                    label="Last Name"
+                    error={touched.lastName && Boolean(errors.lastName)}
+                    helperText={touched.lastName && errors.lastName}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <Field
+                    as={TextField}
+                    name="email"
+                    label="Email"
+                    error={touched.email && Boolean(errors.email)}
+                    helperText={touched.email && errors.email}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <Field
+                    as={TextField}
+                    name="phone"
+                    label="Phone"
+                    error={touched.email && Boolean(errors.email)}
+                    helperText={touched.email && errors.email}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Field
+                    as={TextField}
+                    name="address"
+                    label="Address"
+                    error={touched.address && Boolean(errors.address)}
+                    helperText={touched.address && errors.address}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <Field
+                    as={TextField}
+                    name="city"
+                    label="City"
+                    error={touched.city && Boolean(errors.city)}
+                    helperText={touched.city && errors.city}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <StyledAutocomplete
+                    disablePortal
+                    name="state"
+                    options={[]}
+                    onChange={(e, value) => setFieldValue("state", value.label)}
+                    onBlur={() => setFieldTouched("state", true)}
+                    error={touched.state && Boolean(errors.state)}
+                    sx={{ width: '100%' }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="State"
+                        helperText={touched.state && errors.state}
+                        error={touched.state && Boolean(errors.state)}
+                        fullWidth
+                      />
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <Field
+                    as={TextField}
+                    name="zip"
+                    label="Zip"
+                    error={touched.zip && Boolean(errors.zip)}
+                    helperText={touched.zip && errors.zip}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Field
+                    as={TextField}
+                    multiline
+                    rows={4}
+                    name="profileNotes"
+                    label="Profile Notes"
+                    error={touched.profileNotes && Boolean(errors.profileNotes)}
+                    helperText={touched.profileNotes && errors.profileNotes}
+                    fullWidth
+                  />
+                </Grid>
+              </StyledGridContainer>
               <DialogActions>
                 <Button type="submit">Submit</Button>
                 <Button onClick={onClose}>Cancel</Button>

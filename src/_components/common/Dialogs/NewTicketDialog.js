@@ -6,13 +6,19 @@ import Grid from "@mui/material/Grid";
 import {styled} from "@mui/material/styles";
 
 const validationSchema = Yup.object().shape({
-  field1: Yup.string().required('Field 1 is required'),
-  field2: Yup.string().required('Field 2 is required'),
+  ticketTitle: Yup.string().required('Required'),
+  mainCategory: Yup.string().required('Required'),
+  secondCategory: Yup.string().required('Required'),
+  customerSearch: Yup.string().required('Required'),
+  initialNotes: Yup.string().required('Required'),
 });
 
 const initialValues = {
   ticketTitle: '',
-  mainCategory: {},
+  mainCategory: '',
+  secondCategory: '',
+  customerSearch: '',
+  initialNotes: ''
 };
 
 
@@ -34,9 +40,13 @@ const secondaryCategoryOptions = [
   {label: 'Domain Name Acquisition', mainCategory: 'Hosting'},
 ]
 
+const StyledGridContainer = styled(Grid)(({ theme }) => ({
+  marginTop: '0px'
+}));
+
 const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
   width: '100%',
-  marginTop: '20px',
+  marginTop: '10px',
 
   '& .MuiAutocomplete-inputRoot': {
     width: '100%',
@@ -60,36 +70,97 @@ const NewTicketDialog = ({ open, onClose }) => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ errors, values, setFieldValue, touched }) => (
+          {({errors, values, setFieldValue, touched, setFieldTouched}) => (
             <Form>
-              <Grid container spacing={2}>
+              <StyledGridContainer container spacing={2}>
                 <Grid item xs={12}>
                   <Field
                     as={TextField}
                     name="ticketTitle"
                     label="Title"
-                    error={touched.field1 && Boolean(errors.field1)}
-                    helperText={touched.field1 && errors.field1}
+                    error={touched.ticketTitle && Boolean(errors.ticketTitle)}
+                    helperText={touched.ticketTitle && errors.ticketTitle}
                     fullWidth
                   />
                 </Grid>
-                <StyledAutocomplete
-                  disablePortal
-                  id="combo-box-demo"
-                  name="mainCategory"
-                  options={mainCategoryOptions}
-                  onChange={(e, value) => setFieldValue("mainCategory", value)}
-                  sx={{ width: '100%' }}
-                  renderInput={(params) => <TextField {...params} label="Main Category" />}
-                />
-                <StyledAutocomplete
-                  disablePortal
-                  id="combo-box-demo"
-                  options={secondaryCategoryOptions.filter(sc => sc.mainCategory === values.mainCategory?.label)}
-                  sx={{ width: '100%' }}
-                  renderInput={(params) => <TextField {...params} label="Main Category" />}
-                />
-              </Grid>
+                <Grid item xs={6}>
+                  <Field
+                    name="mainCategory"
+                    validate={value => !value && 'Required'}
+                  >
+                    {({ field, form }) => (
+                      <StyledAutocomplete
+                        {...field}
+                        disablePortal
+                        id="mainCategory-autocomplete"
+                        options={mainCategoryOptions}
+                        onChange={(e, value) => form.setFieldValue('mainCategory', value.label)}
+                        onBlur={() => form.setFieldTouched('mainCategory', true)}
+                        error={form.touched.mainCategory && Boolean(form.errors.mainCategory)}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            label="Main Category"
+                            helperText={form.touched.mainCategory && form.errors.mainCategory}
+                            error={form.touched.mainCategory && Boolean(form.errors.mainCategory)}
+                            fullWidth
+                          />
+                        )}
+                      />
+                    )}
+                  </Field>
+                </Grid>
+                <Grid item xs={6}>
+                  <Field
+                    name="secondCategory"
+                    validate={value => !value && 'Required'}
+                  >
+                    {({ field, form }) => (
+                      <StyledAutocomplete
+                        {...field}
+                        disablePortal
+                        id="secondCategory-autocomplete"
+                        options={secondaryCategoryOptions.filter(sc => sc.mainCategory === form.values.mainCategory)}
+                        onChange={(e, value) => form.setFieldValue('secondCategory', value.label)}
+                        onBlur={() => form.setFieldTouched('secondCategory', true)}
+                        error={form.touched.secondCategory && Boolean(form.errors.secondCategory)}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            label="Secondary Category"
+                            helperText={form.touched.secondCategory && form.errors.secondCategory}
+                            error={form.touched.secondCategory && Boolean(form.errors.secondCategory)}
+                            fullWidth
+                          />
+                        )}
+                      />
+                    )}
+                  </Field>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Field
+                    as={TextField}
+                    name="customerSearch"
+                    label="Customer Search"
+                    error={touched.customerSearch && Boolean(errors.customerSearch)}
+                    helperText={touched.customerSearch && errors.customerSearch}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Field
+                    as={TextField}
+                    multiline
+                    rows={4}
+                    name="initialNotes"
+                    label="Initial Notes"
+                    error={touched.initialNotes && Boolean(errors.initialNotes)}
+                    helperText={touched.initialNotes && errors.initialNotes}
+                    fullWidth
+                  />
+                </Grid>
+              </StyledGridContainer>
               <DialogActions>
                 <Button type="submit">Submit</Button>
                 <Button onClick={onClose}>Cancel</Button>
