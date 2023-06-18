@@ -14,6 +14,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { visuallyHidden } from '@mui/utils';
+import Link from "next/link";
+import {theme} from "@/_themes/ThemeProvider";
 
 function createData(ticket, customer, title, opened) {
   return {
@@ -56,10 +58,6 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
-// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
-// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
-// with exampleArray.slice().sort(exampleComparator)
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
@@ -241,24 +239,9 @@ const TicketsTable = () => {
             />
             <TableBody>
               {visibleRows.map((row, index) => {
-                const labelId = `enhanced-table-checkbox-${index}`;
-
                 return (
-                  <TableRow
-                    hover
-                    onClick={(event) => handleClick(event, row.name)}
-                    tabIndex={-1}
-                    key={row.name}
-                    sx={{ cursor: 'pointer' }}
-                  >
-                    <TableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      padding="normal"
-                    >
-                      {row.ticket}
-                    </TableCell>
+                  <TableRow hover key={row.ticket}>
+                    <TableCell padding="normal"><Link style={{color: theme.palette.primary.main, fontWeight: 4500}} href={`/tickets/${row.ticket}`}>{row.ticket}</Link></TableCell>
                     <TableCell align="left">{row.title}</TableCell>
                     <TableCell align="left">{row.customer}</TableCell>
                     <TableCell align="left">{row.opened}</TableCell>
@@ -268,7 +251,7 @@ const TicketsTable = () => {
               {emptyRows > 0 && (
                 <TableRow
                   style={{
-                    height: (dense ? 33 : 53) * emptyRows,
+                    height: 53 * emptyRows,
                   }}
                 >
                   <TableCell colSpan={6} />

@@ -3,6 +3,7 @@ import {Box, Button, Paper, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import Link from "next/link";
 
 
 
@@ -90,7 +91,7 @@ const DashboardActions = ({ openNewTicketDialog, openNewCustomerDialog }) => {
           <Box p={2}>
             <Box sx={{display: 'flex', alignItems: 'center'}}>
               <ActionHeader variant="h6">Resume Session</ActionHeader>
-              <Button sx={{marginLeft: 'auto'}}>#245343</Button>
+              <Button component={Link} href={`tickets/245343`} sx={{marginLeft: 'auto'}}>#245343</Button>
             </Box>
             <Box sx={{display: 'flex'}}>
               <Box>

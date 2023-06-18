@@ -14,6 +14,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { visuallyHidden } from '@mui/utils';
+import Link from "next/link";
+import {theme} from "@/_themes/ThemeProvider";
 
 function createData(ticket, customer, title, opened) {
   return {
@@ -241,24 +243,10 @@ const ClosedTicketsTable = () => {
             />
             <TableBody>
               {visibleRows.map((row, index) => {
-                const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
-                  <TableRow
-                    hover
-                    onClick={(event) => handleClick(event, row.name)}
-                    tabIndex={-1}
-                    key={row.name}
-                    sx={{ cursor: 'pointer' }}
-                  >
-                    <TableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      padding="normal"
-                    >
-                      {row.ticket}
-                    </TableCell>
+                  <TableRow hover key={row.ticket}>
+                    <TableCell padding="normal"><Link style={{color: theme.palette.primary.main, fontWeight: 4500}} href={`/tickets/${row.ticket}`}>{row.ticket}</Link></TableCell>
                     <TableCell align="left">{row.title}</TableCell>
                     <TableCell align="left">{row.customer}</TableCell>
                     <TableCell align="left">{row.opened}</TableCell>
@@ -268,7 +256,7 @@ const ClosedTicketsTable = () => {
               {emptyRows > 0 && (
                 <TableRow
                   style={{
-                    height: (dense ? 33 : 53) * emptyRows,
+                    height: 53 * emptyRows,
                   }}
                 >
                   <TableCell colSpan={6} />
