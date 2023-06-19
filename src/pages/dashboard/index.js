@@ -6,6 +6,7 @@ import DashboardActions from "@/_components/Dashboard/DashboardActions";
 import {theme} from "@/_themes/ThemeProvider";
 import NewTicketDialog from '@/_components/common/Dialogs/NewTicketDialog';
 import NewCustomerDialog from '@/_components/common/Dialogs/NewCustomerDialog';
+import HeadingMain from "@/_components/common/Text/HeadingMain";
 
 const styles = {
 
@@ -34,15 +35,15 @@ const Dashboard = () => {
   return (
       <main>
         <Container sx={{marginTop: '35px'}}>
-          <Typography variant="h4" sx={{color: theme.palette.primary.darkHeading}}>Dashboard</Typography>
+          <HeadingMain>Dashboard</HeadingMain>
 
-          <DashboardActions 
-            openNewTicketDialog={handleNewTicketDialogOpen} 
-            openNewCustomerDialog={handleNewCustomerDialogOpen} 
+          <DashboardActions
+            openNewTicketDialog={handleNewTicketDialogOpen}
+            openNewCustomerDialog={handleNewCustomerDialogOpen}
           />
 
           <TicketTabs />
-          
+
           <NewTicketDialog open={openNewTicketDialog} onClose={handleNewTicketDialogClose} />
           <NewCustomerDialog open={openNewCustomerDialog} onClose={handleNewCustomerDialogClose} />
         </Container>
