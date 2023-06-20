@@ -4,9 +4,10 @@ import React from "react";
 import {styled} from "@mui/material/styles";
 import withAuth from "@/_context/withAuth";
 import Link from "next/link";
-import HeadingSecondary from "@/_components/common/Text/HeadingSecondary";
 import ReadOnlyFieldLabel from "@/_components/common/Text/ReadOnlyFieldLabel";
 import DescriptionText from "@/_components/common/Text/DescriptionText";
+import HeadingMain from "@/_components/common/Text/HeadingMain";
+import Grid from "@mui/material/Grid";
 
 const TicketHeadingSection = styled(Paper)(({theme}) => ({
   marginTop: '20px',
@@ -14,24 +15,35 @@ const TicketHeadingSection = styled(Paper)(({theme}) => ({
   backgroundColor: 'rgba(76, 175, 80, 0.04)',
 }));
 
+const CustomReadOnlyFieldLabel = styled(ReadOnlyFieldLabel)(({ theme }) => ({
+  marginTop: '0px !important',
+}));
+
 const TicketDetail = ({ ticketId }) => {
   return (
     <main>
       <Container sx={{marginTop: '35px'}}>
-        <Typography variant="h4" sx={{color: theme.palette.primary.darkHeading}}>Ticket #{ticketId}</Typography>
+        <HeadingMain>Ticket #{ticketId}</HeadingMain>
 
         <TicketHeadingSection elevation={0}>
-          <Box p={2}>
-            <Box sx={{display: 'flex'}}>
-              <Box>
-                <ReadOnlyFieldLabel>Customer:</ReadOnlyFieldLabel>
+          <Box p={'0 20px 0 20px'}>
+            <Grid container>
+              <Grid item xs={6}>
+                <CustomReadOnlyFieldLabel>Customer:</CustomReadOnlyFieldLabel>
                 <DescriptionText>Vance Garner</DescriptionText>
-                <ReadOnlyFieldLabel>Title:</ReadOnlyFieldLabel>
-                <DescriptionText>Frontend Updates</DescriptionText>
-                <ReadOnlyFieldLabel>Description:</ReadOnlyFieldLabel>
-                <DescriptionText>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.</DescriptionText>
-              </Box>
-            </Box>
+              </Grid>
+              <Grid item xs={6}>
+                <CustomReadOnlyFieldLabel>Contact:</CustomReadOnlyFieldLabel>
+                <DescriptionText>111-222-3333</DescriptionText>
+                <DescriptionText>Vance@example.com</DescriptionText>
+              </Grid>
+              <Grid item xs={6}>
+                <CustomReadOnlyFieldLabel>Address:</CustomReadOnlyFieldLabel>
+                <DescriptionText>214 53rd Lane</DescriptionText>
+                <DescriptionText>Redford, MI</DescriptionText>
+                <DescriptionText>48239</DescriptionText>
+              </Grid>
+            </Grid>
           </Box>
         </TicketHeadingSection>
 
