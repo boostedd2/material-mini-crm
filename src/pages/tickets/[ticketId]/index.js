@@ -8,6 +8,7 @@ import ReadOnlyFieldLabel from "@/_components/common/Text/ReadOnlyFieldLabel";
 import DescriptionText from "@/_components/common/Text/DescriptionText";
 import HeadingMain from "@/_components/common/Text/HeadingMain";
 import Grid from "@mui/material/Grid";
+import TicketDetailTabs from "@/_components/TicketDetail/TicketDetailTabs";
 
 const TicketHeadingSection = styled(Paper)(({theme}) => ({
   marginTop: '20px',
@@ -46,6 +47,8 @@ const TicketDetail = ({ ticketId }) => {
             </Grid>
           </Box>
         </TicketHeadingSection>
+
+        <TicketDetailTabs />
 
       </Container>
     </main>
