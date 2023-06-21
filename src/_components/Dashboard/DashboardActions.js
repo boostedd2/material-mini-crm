@@ -3,6 +3,8 @@ import {Box, Button, Paper, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import SearchIcon from '@mui/icons-material/Search';
+import ForumIcon from '@mui/icons-material/Forum';
 import Link from "next/link";
 import ReadOnlyFieldLabel from "@/_components/common/Text/ReadOnlyFieldLabel";
 import DescriptionText from "@/_components/common/Text/DescriptionText";
@@ -20,13 +22,13 @@ const RecentTicketCard = styled(Paper)(({theme}) => ({
 
 }));
 
-const DashboardActionsWrapper = styled(Box)(({theme}) => ({
-  display: 'flex',
+const DashboardActionsWrapper = styled(Grid)(({ theme }) => ({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2, 1fr)',
   gap: 10,
 
-  [theme.breakpoints.up('sm')]: {
-    flexDirection: 'column',
-    gap: 'unset'
+  [theme.breakpoints.up('md')]: {
+    gridTemplateColumns: 'repeat(2, 1fr)',
   },
 }));
 
@@ -51,6 +53,7 @@ const DashboardActionButton = styled(Button)(({theme}) => ({
 const DashboardActions = ({ openNewTicketDialog, openNewCustomerDialog }) => {
   return (
     <Grid container mt={0} spacing={2}>
+
       <Grid item xs={12} sm={6}>
         <RecentTicketCard elevation={0}>
           <Box p={2}>
@@ -58,6 +61,7 @@ const DashboardActions = ({ openNewTicketDialog, openNewCustomerDialog }) => {
               <HeadingSecondary>Resume Session</HeadingSecondary>
               <Button component={Link} href={`tickets/245343`} sx={{marginLeft: 'auto'}}>#245343</Button>
             </Box>
+
             <Box sx={{display: 'flex'}}>
               <Box>
                 <ReadOnlyFieldLabel sx={{marginTop: '5px'}}>Customer:</ReadOnlyFieldLabel>
@@ -71,22 +75,41 @@ const DashboardActions = ({ openNewTicketDialog, openNewCustomerDialog }) => {
           </Box>
         </RecentTicketCard>
       </Grid>
+
       <Grid item xs={12} sm={6}>
-        <DashboardActionsWrapper>
-          <DashboardActionButton sx={{marginBottom: '10px'}} onClick={() => openNewTicketDialog()}>
-            <Grid container direction="column" alignItems="center" justify="center">
-              <NoteAddIcon/>
-              <Typography>Ticket</Typography>
-            </Grid>
-          </DashboardActionButton>
-          <DashboardActionButton  onClick={() => openNewCustomerDialog()}>
-            <Grid container direction="column" alignItems="center" justify="center">
-              <PersonAddIcon/>
-              <Typography>Customer</Typography>
-            </Grid>
-          </DashboardActionButton>
-        </DashboardActionsWrapper>
+          <DashboardActionsWrapper>
+
+            <DashboardActionButton onClick={() => openNewTicketDialog()}>
+              <Grid container direction="column" alignItems="center" justify="center">
+                <NoteAddIcon/>
+                <Typography>Ticket</Typography>
+              </Grid>
+            </DashboardActionButton>
+
+            <DashboardActionButton onClick={() => console.log('open search')}>
+              <Grid container direction="column" alignItems="center" justify="center">
+                <SearchIcon/>
+                <Typography>Search</Typography>
+              </Grid>
+            </DashboardActionButton>
+
+            <DashboardActionButton onClick={() => openNewCustomerDialog()}>
+              <Grid container direction="column" alignItems="center" justify="center">
+                <PersonAddIcon/>
+                <Typography>Customer</Typography>
+              </Grid>
+            </DashboardActionButton>
+
+            <DashboardActionButton onClick={() => console.log('open messages')}>
+              <Grid container direction="column" alignItems="center" justify="center">
+                <ForumIcon/>
+                <Typography>Messages</Typography>
+              </Grid>
+            </DashboardActionButton>
+
+          </DashboardActionsWrapper>
       </Grid>
+
     </Grid>
   );
 };
