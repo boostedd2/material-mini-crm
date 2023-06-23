@@ -50,7 +50,7 @@ const DashboardActionButton = styled(Button)(({theme}) => ({
 }));
 
 
-const DashboardActions = ({ openNewTicketDialog, openNewCustomerDialog }) => {
+const DashboardActions = ({ openNewTicketDialog, openNewCustomerDialog, openSearchDialog }) => {
   return (
     <Grid container mt={0} spacing={2}>
 
@@ -86,7 +86,7 @@ const DashboardActions = ({ openNewTicketDialog, openNewCustomerDialog }) => {
               </Grid>
             </DashboardActionButton>
 
-            <DashboardActionButton onClick={() => console.log('open search')}>
+            <DashboardActionButton onClick={() => openSearchDialog()}>
               <Grid container direction="column" alignItems="center" justify="center">
                 <SearchIcon/>
                 <Typography>Search</Typography>

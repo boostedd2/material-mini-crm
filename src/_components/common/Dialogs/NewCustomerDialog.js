@@ -1,10 +1,20 @@
 import React from 'react';
-import {Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, Autocomplete} from '@mui/material';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  TextField,
+  Autocomplete,
+  IconButton
+} from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Grid from "@mui/material/Grid";
 import {styled} from "@mui/material/styles";
 import {stateOptions} from "@/utils/constants";
+import CloseIcon from "@mui/icons-material/Close";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required('Required'),
@@ -50,7 +60,21 @@ const NewCustomerDialog = ({ open, onClose }) => {
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>New Customer</DialogTitle>
+      <DialogTitle>
+        New Customer
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon/>
+        </IconButton>
+      </DialogTitle>
       <DialogContent>
         <Formik
           initialValues={initialValues}
@@ -164,8 +188,7 @@ const NewCustomerDialog = ({ open, onClose }) => {
                 </Grid>
               </StyledGridContainer>
               <DialogActions>
-                <Button type="submit">Submit</Button>
-                <Button onClick={onClose}>Cancel</Button>
+                <Button type="submit">Create</Button>
               </DialogActions>
             </Form>
           )}
