@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import { useState } from 'react'
 import TicketDetailsForm from "@/_components/TicketDetail/TicketDetailsCardWrapper";
 import TicketDetailsCardWrapper from "@/_components/TicketDetail/TicketDetailsCardWrapper";
+import DetailTab from "@/_components/TicketDetail/Tabs/DetailTab";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,7 +52,9 @@ const TicketDetailTabs = () => {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <TicketDetailsCardWrapper></TicketDetailsCardWrapper>
+        <TicketDetailsCardWrapper>
+          <DetailTab />
+        </TicketDetailsCardWrapper>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <TicketDetailsCardWrapper></TicketDetailsCardWrapper>
