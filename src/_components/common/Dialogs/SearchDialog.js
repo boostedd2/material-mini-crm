@@ -25,6 +25,10 @@ const SearchDialog = ({ open, onClose }) => {
       backgroundColor: theme.palette.lightBackground.main,
     },
 
+    '& .MuiOutlinedInput-notchedOutline': {
+      border: 'none'
+    }
+
   }));
 
 
