@@ -10,9 +10,9 @@ const StyledLabel = styled(Typography)(({theme}) => ({
   letterSpacing: '0.08em',
 }));
 
-const ReadOnlyFieldLabel = ({ children }) => {
+const ReadOnlyFieldLabel = ({ children, noMargin }) => {
   return (
-    <StyledLabel>{children}</StyledLabel>
+    <StyledLabel sx={noMargin ? {marginTop: 0} : undefined}>{children}</StyledLabel>
   );
 };
 

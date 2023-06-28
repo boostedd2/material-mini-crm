@@ -28,6 +28,7 @@ const initialValues = {
   mainCategory: '',
   secondCategory: '',
   customerSearch: '',
+  deadline: '',
   initialNotes: ''
 };
 
@@ -56,7 +57,6 @@ const StyledGridContainer = styled(Grid)(({ theme }) => ({
 
 const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
   width: '100%',
-  marginTop: '10px',
 
   '& .MuiAutocomplete-inputRoot': {
     width: '100%',
@@ -169,6 +169,16 @@ const NewTicketDialog = ({ open, onClose }) => {
                     label="Customer Search"
                     error={touched.customerSearch && Boolean(errors.customerSearch)}
                     helperText={touched.customerSearch && errors.customerSearch}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Field
+                    as={TextField}
+                    name="deadline"
+                    label="Deadline (optional)"
+                    error={touched.deadline && Boolean(errors.deadline)}
+                    helperText={touched.deadline && errors.deadline}
                     fullWidth
                   />
                 </Grid>

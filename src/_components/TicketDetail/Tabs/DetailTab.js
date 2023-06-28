@@ -4,6 +4,10 @@ import {Autocomplete, Button, DialogActions, TextField} from "@mui/material";
 import React from "react";
 import * as Yup from "yup";
 import {styled} from "@mui/material/styles";
+import ReadOnlyFieldLabel from "@/_components/common/Text/ReadOnlyFieldLabel";
+import DescriptionText from "@/_components/common/Text/DescriptionText";
+import Link from "next/link";
+import { theme } from "../../../_themes/ThemeProvider"
 
 const validationSchema = Yup.object().shape({
   ticketTitle: Yup.string().required('Required'),
@@ -15,10 +19,10 @@ const validationSchema = Yup.object().shape({
 
 const initialValues = {
   ticketTitle: '',
+  assignedTo: '',
   mainCategory: '',
   secondCategory: '',
-  customerSearch: '',
-  initialNotes: ''
+  deadline: '',
 };
 
 
@@ -41,12 +45,12 @@ const secondaryCategoryOptions = [
 ]
 
 const StyledGridContainer = styled(Grid)(({ theme }) => ({
-  padding: 20
+  padding: 20,
+  marginTop: 0
 }));
 
 const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
   width: '100%',
-  marginTop: '10px',
 
   '& .MuiAutocomplete-inputRoot': {
     width: '100%',
@@ -66,11 +70,46 @@ const DetailTab = () => {
         {({errors, values, setFieldValue, touched, setFieldTouched}) => (
           <Form>
             <StyledGridContainer container spacing={2}>
-              <Grid item xs={12}>
+              <Grid item xs={6} style={{paddingTop: 0, paddingBottom: 25, display: 'flex', alignItems: 'center'}}>
+                <ReadOnlyFieldLabel noMargin>Time Spent:</ReadOnlyFieldLabel>
+                <DescriptionText>00:00</DescriptionText>
+              </Grid>
+              <Grid item xs={6} style={{paddingTop: 0, paddingBottom: 25, display: 'flex'}}>
+                <Button sx={{
+                  marginLeft: 'auto', backgroundColor: theme.palette.primary.light,
+                  color: theme.palette.primary.main
+                }}>OPEN</Button>
+              </Grid>
+              <Grid item xs={6} style={{paddingTop: 0, paddingBottom: 15}}>
+                <ReadOnlyFieldLabel noMargin>Created by:</ReadOnlyFieldLabel>
+                <DescriptionText>Admin</DescriptionText>
+              </Grid>
+              <Grid item xs={6} style={{paddingTop: 0, paddingBottom: 15}}>
+                <ReadOnlyFieldLabel noMargin>Created on:</ReadOnlyFieldLabel>
+                <DescriptionText>2023-07-15</DescriptionText>
+              </Grid>
+              <Grid item xs={6} style={{paddingTop: 0, paddingBottom: 15}}>
+                <ReadOnlyFieldLabel noMargin>Deadline:</ReadOnlyFieldLabel>
+                <DescriptionText>2023-08-15</DescriptionText>
+              </Grid>
+              <Grid item xs={6} style={{paddingTop: 0, paddingBottom: 15}}>
+              </Grid>
+              <Grid item xs={6}>
                 <Field
                   as={TextField}
                   name="ticketTitle"
                   label="Title"
+                  error={touched.ticketTitle && Boolean(errors.ticketTitle)}
+                  helperText={touched.ticketTitle && errors.ticketTitle}
+                  fullWidth
+                  disabled
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Field
+                  as={TextField}
+                  name="assignedTo"
+                  label="Assigned To"
                   error={touched.ticketTitle && Boolean(errors.ticketTitle)}
                   helperText={touched.ticketTitle && errors.ticketTitle}
                   fullWidth
