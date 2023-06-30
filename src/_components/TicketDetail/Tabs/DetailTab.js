@@ -172,6 +172,12 @@ const DetailTab = () => {
                   )}
                 </Field>
               </Grid>
+              <Grid item xs={6} style={{paddingTop: 50, paddingBottom: 15}}>
+                <ReadOnlyFieldLabel noMargin>Recent Actions:</ReadOnlyFieldLabel>
+                <DescriptionText>Ticket was assigned to Admin</DescriptionText>
+                <DescriptionText>New ticket opened</DescriptionText>
+                <DescriptionText>New Customer</DescriptionText>
+              </Grid>
             </StyledGridContainer>
             <DialogActions>
               <Button>Edit</Button>
