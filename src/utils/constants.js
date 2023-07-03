@@ -50,3 +50,19 @@ export const stateOptions = [
   { label: 'Wisconsin' },
   { label: 'Wyoming' }
 ];
+
+
+export const getCurrentDateTime = () => {
+  const currentDate = new Date();
+  const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+  const formattedTime = `${currentDate.getHours()}:${currentDate.getMinutes().toString().padStart(2, '0')}`;
+  return `${formattedDate} - ${formattedTime}`;
+};
+
+
+export const scrollToBottom = ({targetElement = null} = {}) => {
+  targetElement.scrollTo({
+    top: targetElement.scrollHeight,
+    behavior: 'smooth'
+  });
+}

@@ -1,12 +1,11 @@
 import {Field, Form, Formik} from "formik";
 import Grid from "@mui/material/Grid";
-import {Autocomplete, Button, DialogActions, TextField} from "@mui/material";
+import {Autocomplete, Button, TextField, Box} from "@mui/material";
 import React from "react";
 import * as Yup from "yup";
 import {styled} from "@mui/material/styles";
 import ReadOnlyFieldLabel from "@/_components/common/Text/ReadOnlyFieldLabel";
 import DescriptionText from "@/_components/common/Text/DescriptionText";
-import Link from "next/link";
 import { theme } from "../../../_themes/ThemeProvider"
 
 const validationSchema = Yup.object().shape({
@@ -61,7 +60,7 @@ const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
 
 const DetailTab = () => {
   return (
-    <div>
+    <Box>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -172,6 +171,9 @@ const DetailTab = () => {
                   )}
                 </Field>
               </Grid>
+              <Grid item xs={12} sx={{display: 'flex', justifyContent: 'end'}}>
+                <Button>Edit</Button>
+              </Grid>
               <Grid item xs={6} style={{paddingTop: 50, paddingBottom: 15}}>
                 <ReadOnlyFieldLabel noMargin>Recent Actions:</ReadOnlyFieldLabel>
                 <DescriptionText>Ticket was assigned to Admin</DescriptionText>
@@ -179,13 +181,10 @@ const DetailTab = () => {
                 <DescriptionText>New Customer</DescriptionText>
               </Grid>
             </StyledGridContainer>
-            <DialogActions>
-              <Button>Edit</Button>
-            </DialogActions>
           </Form>
         )}
       </Formik>
-    </div>
+    </Box>
   )
 }
 

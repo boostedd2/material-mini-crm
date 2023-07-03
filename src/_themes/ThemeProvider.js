@@ -5,10 +5,12 @@ export const theme = createTheme({
     primary: {
       main: '#4CAF50',
       light: '#E8F5E9',
-      darkHeading: '#424242',
+      darkHeading: '#7b7b7b',
     },
     secondary: {
       main: '#ffffff',
+      darker: '#fafafa',
+      caption: '#7d7d7d'
     },
     errorLighter: {
       main: '#FFEBEE'

@@ -6,6 +6,7 @@ import { useState } from 'react'
 import TicketDetailsForm from "@/_components/TicketDetail/TicketDetailsCardWrapper";
 import TicketDetailsCardWrapper from "@/_components/TicketDetail/TicketDetailsCardWrapper";
 import DetailTab from "@/_components/TicketDetail/Tabs/DetailTab";
+import NotesTab from "@/_components/TicketDetail/Tabs/NotesTab";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -57,7 +58,9 @@ const TicketDetailTabs = () => {
         </TicketDetailsCardWrapper>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <TicketDetailsCardWrapper></TicketDetailsCardWrapper>
+        <TicketDetailsCardWrapper>
+          <NotesTab />
+        </TicketDetailsCardWrapper>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <TicketDetailsCardWrapper></TicketDetailsCardWrapper>
