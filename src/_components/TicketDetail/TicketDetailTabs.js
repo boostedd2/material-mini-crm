@@ -7,6 +7,7 @@ import TicketDetailsForm from "@/_components/TicketDetail/TicketDetailsCardWrapp
 import TicketDetailsCardWrapper from "@/_components/TicketDetail/TicketDetailsCardWrapper";
 import DetailTab from "@/_components/TicketDetail/Tabs/DetailTab";
 import NotesTab from "@/_components/TicketDetail/Tabs/NotesTab";
+import PaymentTab from "@/_components/TicketDetail/Tabs/PaymentTab";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -63,7 +64,9 @@ const TicketDetailTabs = () => {
         </TicketDetailsCardWrapper>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <TicketDetailsCardWrapper></TicketDetailsCardWrapper>
+        <TicketDetailsCardWrapper>
+          <PaymentTab />
+        </TicketDetailsCardWrapper>
       </TabPanel>
       <TabPanel value={value} index={3}>
         <TicketDetailsCardWrapper></TicketDetailsCardWrapper>
