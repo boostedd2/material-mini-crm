@@ -16,15 +16,6 @@ const validationSchema = Yup.object().shape({
   initialNotes: Yup.string().required('Required'),
 });
 
-const initialValues = {
-  ticketTitle: '',
-  assignedTo: '',
-  mainCategory: '',
-  secondCategory: '',
-  deadline: '',
-};
-
-
 const mainCategoryOptions = [
   {label: 'Software Development'},
   {label: 'Server Management'},
@@ -42,6 +33,14 @@ const secondaryCategoryOptions = [
   {label: 'DNS Records', mainCategory: 'Hosting'},
   {label: 'Domain Name Acquisition', mainCategory: 'Hosting'},
 ]
+
+const initialValues = {
+  ticketTitle: 'Frontend Updates',
+  assignedTo: 'Admin',
+  mainCategory: mainCategoryOptions[0].label,
+  secondCategory: secondaryCategoryOptions[0].label,
+  deadline: '',
+};
 
 const StyledGridContainer = styled(Grid)(({ theme }) => ({
   padding: 20,
@@ -98,6 +97,7 @@ const DetailTab = () => {
                   as={TextField}
                   name="ticketTitle"
                   label="Title"
+                  value={values.ticketTitle}
                   error={touched.ticketTitle && Boolean(errors.ticketTitle)}
                   helperText={touched.ticketTitle && errors.ticketTitle}
                   fullWidth
