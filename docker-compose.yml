@@ -3,6 +3,13 @@ services:
   material-mini-crm:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
       - '3000:3000'
+
+  material-mini-node:
+    build:
+      context: ./node_backend/src/
+      dockerfile: Dockerfile
+    ports:
+      - '3001:3001'
