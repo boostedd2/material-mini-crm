@@ -1,13 +1,17 @@
-const express = require('express')
-const config = require('./config');
+const expressLoader = require('./loaders/express');
+const postgresLoader = require('./loaders/postgres');
 
-const app = express()
-const port = config.port
+async function startServer() {
+  try {
+    await postgresLoader();
+    await expressLoader();
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+    console.log('Express app has been initialized.');
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  } catch (error) {
+    console.error('Error occurred during server startup:', error);
+    process.exit(1);
+  }
+}
+
+startServer();
