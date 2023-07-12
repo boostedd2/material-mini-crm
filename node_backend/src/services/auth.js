@@ -1,13 +1,24 @@
-const argon2 = require('argon2');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { randomBytes } = require('crypto');
-const config = require('./config');
+const config = require('../config');
+const User = require('../models/user');
 
 class AuthService {
   async register(userInput) {
     try {
-      const salt = randomBytes(32);
-      const hashedPassword = await argon2.hash(userInput.password, { salt });
+      const { email, password } = userInput;
+
+      const existingUser = await User.findOne({ where: { email } });
+      if (existingUser) {
+        return { error: 'Email already registered' };
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      const newUser = await User.create({
+        email,
+        password: hashedPassword,
+      });
 
       const token = this.generateToken();
 
@@ -20,10 +31,15 @@ class AuthService {
 
   async login(email, password) {
     try {
+      const user = await User.findOne({ where: { email } });
 
-      const validPassword = await argon2.verify(userRecord.password, password);
+      if (!user) {
+        return { error: 'Invalid email or password.' };
+      }
+
+      const validPassword = await bcrypt.compare(password, user.password);
       if (!validPassword) {
-        throw new Error('Invalid password');
+        return { error: 'Invalid email or password.' };
       }
 
       const token = this.generateToken();
@@ -36,8 +52,7 @@ class AuthService {
   }
 
   generateToken() {
-    const token = jwt.sign({}, config.jwtSecret, { expiresIn: '1h' });
-    return token;
+    return jwt.sign({}, config.jwtSecret, { expiresIn: '1h' });
   }
 }
 
