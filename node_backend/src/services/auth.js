@@ -6,7 +6,7 @@ const User = require('../models/user');
 class AuthService {
   async register(userInput) {
     try {
-      const { email, password } = userInput;
+      const { email, password, firstName, lastName } = userInput;
 
       const existingUser = await User.findOne({ where: { email } });
       if (existingUser) {
@@ -18,6 +18,8 @@ class AuthService {
       const newUser = await User.create({
         email,
         password: hashedPassword,
+        firstName,
+        lastName
       });
 
       const token = this.generateToken();

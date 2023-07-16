@@ -6,7 +6,7 @@ const authService = new AuthService();
 
 router.post('/', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, firstName, lastName } = req.body;
 
     if (!email || !password) {
       return res.status(400).json({ error: 'Email and password are required' });
@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ error: 'Email already registered' });
     }
 
-    const userInput = { email, password };
+    const userInput = { email, password, firstName, lastName };
     const { token } = await authService.register(userInput);
 
     return res.json({ token });
