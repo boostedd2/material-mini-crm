@@ -1,0 +1,64 @@
+version: '3'
+services:
+  material-mini-crm:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - '3000:3000'
+    labels:
+      - traefik.http.routers.minicrm-ui.rule=Host(`minicrm.staging.local`)
+      - traefik.http.routers.minicrm-ui.tls=true
+      - traefik.http.routers.minicrm-ui.tls.certresolver=lets-encrypt
+      - traefik.port=3000
+
+  material-mini-node:
+    build:
+      context: ./node_backend/src/
+      dockerfile: Dockerfile
+    ports:
+      - '127.0.0.1:3001:3001'
+      - '127.0.0.1:9229:9229'
+    command: sh -c "npm run dev-debug"
+    volumes:
+      - ./node_backend/src:/app
+      - node_modules:/app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres
+    ports:
+      - '127.0.0.1:5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+
+  nginx:
+    image: nginx:1.21.4
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - ./static:/code/static
+      - ./media:/code/media
+    networks:
+      - nginx_network
+      - web
+    labels:
+      - traefik.http.routers.minicrm.rule=Host(`api.minicrm.staging.local`)
+      - traefik.http.routers.minicrm.tls=true
+      - traefik.http.routers.minicrm.tls.certresolver=lets-encrypt
+      - traefik.http.middlewares.minicrm.compress=true
+      - traefik.port=80
+
+volumes:
+  postgres-data:
+  node_modules:
