@@ -19,6 +19,9 @@ services:
     ports:
       - '127.0.0.1:3001:3001'
       - '127.0.0.1:9229:9229'
+    networks:
+      - nginx_network
+      - web
     command: sh -c "npm run dev-debug"
     volumes:
       - ./node_backend/src:/app
@@ -62,3 +65,9 @@ services:
 volumes:
   postgres-data:
   node_modules:
+
+networks:
+  nginx_network:
+    driver: bridge
+  web:
+    external: true
